@@ -139,7 +139,6 @@ python-inventory-management-system/
 │
 ├── inventory_management.py
 ├── README.md
-└── .gitignore
 ```
 
 ## 👤 Author
