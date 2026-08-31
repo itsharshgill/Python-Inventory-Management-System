@@ -138,7 +138,7 @@ Possible improvements include:
 python-inventory-management-system/
 │
 ├── inventory_management.py
-├── README.md
+└── README.md
 ```
 
 ## 👤 Author
