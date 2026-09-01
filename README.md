@@ -1,12 +1,14 @@
 # Python Inventory Management System
 
-A command-line inventory management system built with Python for managing product information, including prices and quantities.
+A beginner-friendly command-line inventory management system built with **Python and MySQL** for managing product information, including prices and quantities.
 
 ## 📌 Overview
 
-This project is a console-based application that allows users to manage an inventory through a simple menu-driven interface.
+This project is a console-based inventory management application that uses a **MySQL database** to store and manage product records.
 
-The system stores product information such as **price** and **quantity** and provides options to add, update, remove, search, and view products.
+The system provides a simple menu-driven interface for adding, updating, removing, viewing, and searching products. It can also calculate the total value of the inventory using product prices and quantities.
+
+Python communicates with the MySQL database using the `mysql-connector-python` library.
 
 ## 🚀 Features
 
@@ -18,20 +20,48 @@ The system stores product information such as **price** and **quantity** and pro
 * Calculate the total value of the inventory
 * Sort products alphabetically when displaying inventory
 * Track product price and quantity
+* Store product records in MySQL
+* Insert, update, delete, and retrieve database records
+* Command-line based interface
+
+## 🗄️ Database
+
+The application uses a MySQL database named:
+
+```text id="z4xq7m"
+inventory_management
+```
+
+The database contains a `products` table with the following fields:
+
+| Column     | Description                   |
+| ---------- | ----------------------------- |
+| `id`       | Unique product ID             |
+| `name`     | Product name                  |
+| `price`    | Product price                 |
+| `quantity` | Product quantity in kilograms |
+
+The application automatically creates the database and `products` table if they do not already exist.
+
+The application also adds the initial sample products when the table is empty.
 
 ## 🛠️ Technologies Used
 
 * **Python 3**
-* Python Dictionaries
-* Loops & Conditional Statements
+* **MySQL**
+* **MySQL Connector/Python**
+* SQL
+* Functions
+* Loops
+* Conditional Statements
 * User Input
-* Functions/Operations on Data Structures
 * Sorting
 * Basic Data Processing
+* Basic Calculations
 
 ## 💻 Application Menu
 
-```text
+```text id="7h3vl5"
 ---------- Inventory Management System ----------
 
 1. Add Product
@@ -47,7 +77,7 @@ The system stores product information such as **price** and **quantity** and pro
 
 The application starts with sample products such as:
 
-```text
+```text id="8nbt9j"
 Apple
 Banana
 Orange
@@ -59,87 +89,166 @@ Each product contains:
 * Price
 * Quantity
 
-The application can calculate the total inventory value using:
+The total inventory value is calculated using:
 
-```text
+```text id="wz9m18"
 Product Value = Price × Quantity
+```
+
+The application then calculates the combined value of all products stored in the database.
+
+## 🔄 Application Workflow
+
+```text id="6j91j8"
+Start Application
+       ↓
+Display Menu
+       ↓
+Choose an Option
+   ↙   ↓   ↓   ↓   ↓
+ Add Update Remove View Search
+   ↓    ↓    ↓    ↓    ↓
+INSERT UPDATE DELETE SELECT SELECT
+   \     |     |     |     /
+    \    |     |     |    /
+        MySQL
+           ↓
+    Product Records
 ```
 
 ## ▶️ How to Run
 
 ### 1. Clone the repository
 
-```bash
-git clone https://github.com/YOUR-USERNAME/python-inventory-management-system.git
+```bash id="k20h4n"
+git clone https://github.com/itsharshgill/Python-Inventory-Management-System.git
 ```
 
 ### 2. Navigate to the project directory
 
-```bash
-cd python-inventory-management-system
+```bash id="h4q7al"
+cd Python-Inventory-Management-System
 ```
 
-### 3. Run the program
+### 3. Install the required Python package
 
-```bash
-python inventory_management.py
+```bash id="p6d7xm"
+pip install -r requirements.txt
 ```
+
+### 4. Make sure MySQL Server is running
+
+MySQL Server must be installed and running before starting the application.
+
+### 5. Configure MySQL
+
+Open `Database.py` and enter your local MySQL password:
+
+```python id="4fs3eg"
+connection = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="YOUR_MYSQL_PASSWORD"
+)
+```
+
+Replace `YOUR_MYSQL_PASSWORD` with your local MySQL password.
+
+### 6. Run the program
+
+```bash id="j77s9d"
+python Main.py
+```
+
+The application will automatically create the `inventory_management` database and `products` table if they do not already exist.
 
 ## 🔐 Security & Code Quality Note
 
-The original version of this project used `eval()` to process numeric user input.
+The original version of this project used Python's `eval()` function to process numeric user input.
 
-For safer code, user input should be explicitly converted using functions such as:
+The updated version uses explicit type conversion such as:
 
-```python
+```python id="6t2ub4"
 float()
 ```
 
-or
+instead of `eval()`.
 
-```python
-int()
-```
-
-rather than using `eval()`.
-
-Using explicit type conversion prevents user input from being interpreted as executable Python code.
+Using explicit type conversion prevents user input from being interpreted as executable Python code and provides safer input handling.
 
 ## 📚 What I Learned
 
 Through this project, I practiced:
 
-* Working with Python dictionaries
-* Managing structured data
-* Implementing CRUD-style inventory operations
+* Connecting a Python application to MySQL
+* Creating and using a SQL database
+* Creating database tables
+* Inserting records into MySQL
+* Retrieving records using SQL
+* Updating database records
+* Deleting database records
+* Searching database records
+* Calculating values from database records
+* Using Python functions
 * Handling user input
-* Searching and sorting data
-* Performing calculations on stored data
 * Building a menu-driven command-line application
-* Considering secure input handling
+* Separating application logic from database operations
+* Considering safer input handling
 
 ## 🔮 Future Improvements
 
 Possible improvements include:
 
-* Add persistent storage using SQLite or MySQL
 * Add input validation
 * Prevent duplicate product entries
 * Add low-stock alerts
 * Add product categories
-* Add transaction/history tracking
-* Add authentication
-* Improve error handling
-* Separate application logic into reusable functions/classes
+* Add inventory transaction/history tracking
+* Add user authentication
+* Add administrator functionality
+* Improve database error handling
+* Move database credentials to environment variables
+* Separate the application into additional modules as the project grows
 
 ## 📁 Project Structure
 
-```text
-python-inventory-management-system/
+```text id="z2byxq"
+Python-Inventory-Management-System/
 │
-├── inventory_management.py
+├── Main.py
+├── Database.py
+├── requirements.txt
 └── README.md
 ```
+
+### `Main.py`
+
+Contains the main application workflow and handles:
+
+* Menu options
+* User interaction
+* Product operations
+* Inventory display
+* Search
+* Inventory value calculation
+
+### `Database.py`
+
+Handles the MySQL database operations, including:
+
+* Connecting to MySQL
+* Creating the database
+* Creating the `products` table
+* Adding initial products
+* Adding products
+* Updating products
+* Removing products
+* Retrieving products
+* Calculating inventory value
+
+### `requirements.txt`
+
+Contains the Python package required for MySQL connectivity.
 
 ## 👤 Author
 
